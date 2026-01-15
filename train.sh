@@ -1,0 +1,3 @@
+export PYTHONPATH=/home/notebook/data/personal/S9059954/HDR-Competition:$PYTHONPATH
+pip install opencv-python-headless timm scipy einops accelerate lmdb staracc_cv ftfy tqdm Pillow tensorboard -i http://mirrors.oppo.local/pypi --trusted-host mirrors.oppo.local
+CUDA_VISIBLE_DEVICES=0,1 torchrun --nproc_per_node=2 --master_port=4392 basicsr/train.py -opt options/Uformer.yml --launcher pytorch --auto_resume

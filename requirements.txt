@@ -1,0 +1,12 @@
+mamba_ssm
+opencv-python-headless
+timm
+scipy
+einops
+accelerate
+lmdb
+staracc_cv
+ftfy
+tqdm
+Pillow
+tensorboard
