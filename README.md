@@ -160,6 +160,30 @@ python eval.py \
 - 🧠 **LPIPS**: Learned Perceptual Image Patch Similarity
 - 🏆 **Score**: Weighted combination following NTIRE formula
 
+## 🎬 Example & Challenge Focus
+
+<p align="center">
+  <img src="example.png" alt="HDR Fusion Example" width="100%"/>
+</p>
+
+The figure above illustrates the key challenges in multi-exposure HDR fusion. Participants can improve their models from **two main aspects**:
+
+### 🔴 Dynamic Range Recovery (Red Box)
+
+| Challenge | Description |
+|-----------|-------------|
+| 🌑 **Under-exposure** | Dark regions lose details and appear noisy |
+| ☀️ **Over-exposure** | Bright regions are saturated and washed out |
+| 🎯 **Goal** | Recover full dynamic range with rich details in both shadows and highlights |
+
+### 🟡 Motion Ghosting Removal (Yellow Box)
+
+| Challenge | Description |
+|-----------|-------------|
+| 👻 **Ghosting artifacts** | Moving objects appear as semi-transparent duplicates |
+| 🏃 **Motion blur** | Fast-moving subjects cause blurry edges |
+| 🎯 **Goal** | Produce ghost-free HDR images with sharp moving objects |
+
 ## 📁 Project Structure
 
 ```
