@@ -26,7 +26,11 @@ Our baseline model is based on the **Uformer** architecture, adapted for multi-e
 
 ### 📥 Download
 
-Download the dataset from: [www.example.com](https://www.example.com)
+Download the dataset from:
+
+The training data of Phase One can be downloaded via [this link](https://sbox.myoas.com/outpublish.html?code=B2d663aea1bcf8f4a#view) (password: 3A-rjs*4rxIm3) or Google Drive
+The test data of Phase Two can be downloaded via [this link](https://sbox.myoas.com/outpublish.html?code=Bcca759ee16cb70e7#view) (password: 7e!-kV3Y)
+The test data of Phase Three can be downloaded via [this link](https://sbox.myoas.com/outpublish.html?code=B9899fa542cd5af4a#view) (password: kJXjjsa6PL-!)
 
 ### 🗂️ Structure
 
