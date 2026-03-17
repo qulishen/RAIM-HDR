@@ -1,0 +1,31 @@
+# Stage 1: Train from scratch — baseline convergence
+name: "AFUNet_GM_SFT_stage1"
+seed: 42
+
+paths:
+  train_dir: "./datas"
+  log_root:  "./checkpoints"
+  resume_path:         null
+  pretrained_backbone: null   # Train from scratch
+
+data:
+  num_workers:     8
+  batch_size:      3
+  crop_size:       256
+  dataset_repeats: 3
+  use_strong_aug:  false      # No augmentation in stage 1
+
+model:
+  filename: "AFUNet_GM_SFT"
+  type:     "AFUNet"
+
+train:
+  epochs:           60
+  lr:               2e-4
+  min_lr:           1.0e-6
+  grad_accum_steps: 1
+  log_interval:     50
+  use_lpips_weighted: false
+  use_ste_quant:      false
+  use_ema:            true
+  ema_decay:          0.999

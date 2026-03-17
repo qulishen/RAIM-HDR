@@ -1,0 +1,29 @@
+# ==========================================
+# Team: whu_vip
+# Core requirements for NTIRE 2026 Track 2
+# ==========================================
+
+# Model & Training Frameworks
+timm==1.0.24
+accelerate==1.1.0
+einops==0.8.1
+
+# Image Processing & Metrics
+opencv-python==4.13.0.90
+scikit-image==0.25.2
+pillow==12.0.0
+pyiqa==0.1.14.1
+
+# Utilities
+numpy==2.2.6
+PyYAML==6.0.3
+tqdm==4.67.1
+scipy==1.15.3
+matplotlib==3.10.8
+tensorboard==2.20.0
+thop==0.1.1.post2209072238
+
+# HuggingFace Ecosystem (Required by some sub-modules)
+transformers==4.37.2
+huggingface-hub==0.36.0
+safetensors==0.7.0

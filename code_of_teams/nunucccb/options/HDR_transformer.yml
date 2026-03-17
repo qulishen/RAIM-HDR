@@ -1,0 +1,121 @@
+# general settings
+name: HDRTransformer
+model_type: SRModel
+scale: 1
+num_gpu: auto # auto: can infer from your visible devices automatically. official: 8 GPUs
+manual_seed: 0
+find_unused_parameters: false
+
+# dataset and data loader settings
+datasets:
+  train:
+    name: TrainSet
+    type: HDR_Dataset
+    dataroot: ./dataset/train
+    max_others: 4
+    geometric_augs: true
+
+    filename_tmpl: "{}"
+    io_backend:
+      type: disk
+
+    num_worker_per_gpu: 8
+    batch_size_per_gpu: 4
+    gt_size: 256 # Max patch size for progressive training
+    # data loader
+    use_shuffle: true
+    dataset_enlarge_ratio: 1
+    prefetch_mode: ~
+
+  # Uncomment these for validation
+  val:
+    name: ValSet
+    type: HDR_Dataset
+    gt_size: 256
+    dataroot: ./dataset/train
+    io_backend:
+      type: disk
+
+# network structures
+network_g:
+  type: HDRTransformer
+  img_size: 256
+  in_chans: 3
+  embed_dim: 60
+  depths: [2, 2, 2]
+  num_heads: [6, 6, 6]
+  window_size: 8
+  mlp_ratio: 2
+
+# path
+path:
+  pretrain_network_g: ~
+  param_key_g: params_ema
+  strict_load_g: true
+  resume_state: ~
+
+# training settings
+train:
+  ema_decay: 0.999
+
+  optim_g:
+    type: Adam
+    lr: !!float 2e-4
+    weight_decay: 0
+    betas: [0.9, 0.999]
+
+  scheduler:
+    type: CosineAnnealingRestartCyclicLR
+    periods: [80000, 300000, 120000]
+    restart_weights: [1, 1, 1]
+    eta_mins: [0.0001, 0.00005, 0.000001]
+
+  total_iter: 500000
+  warmup_iter: -1 # no warm up
+
+  # losses
+  pixel_opt:
+    type: L1Loss
+    loss_weight: 1.0
+    reduction: mean
+
+  perceptual_opt:
+      type: PerceptualLoss
+      layer_weights:
+        conv1_2: 0.1
+        conv2_2: 0.1
+        conv3_4: 1.0
+        conv4_4: 1.0
+        conv5_4: 1.0
+      vgg_type: vgg19
+      use_input_norm: true
+      range_norm: false
+      perceptual_weight: 0.1
+      style_weight: 0.0
+      criterion: l1
+
+# Uncomment these for validation
+# validation settings
+val:
+  val_freq: !!float 2e3
+  save_img: False
+
+  metrics:
+    psnr: # metric name
+      type: calculate_psnr
+      crop_border: 0
+      test_y_channel: false
+
+# logging settings
+logger:
+  print_freq: 200
+  save_checkpoint_freq: !!float 2e3
+  use_tb_logger: true
+  wandb:
+    project: ~
+    resume_id: ~
+
+# dist training settings
+dist_params:
+  backend: nccl
+  port: 29500

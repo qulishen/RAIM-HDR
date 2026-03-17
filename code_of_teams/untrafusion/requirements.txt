@@ -1,0 +1,24 @@
+# 核心深度学习框架
+torch==2.5.1+cu121
+torchvision==0.20.1+cu121
+accelerate>=0.30.0
+
+# 图像修复框架及依赖
+einops>=0.7.0
+fvcore>=0.1.5
+addict
+pyyaml
+yapf
+
+# 基础数学与图像处理
+numpy>=1.24.3,<2.0.0
+opencv-python>=4.8.0
+opencv_python_headless>=4.8.0
+scikit-image
+scipy
+Pillow>=9.0.0
+
+# 指标与工具
+piq==0.8.0
+tqdm>=4.60.0
+setuptools==80.9.0

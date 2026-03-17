@@ -1,0 +1,31 @@
+# Stage 4: Fine-tune with STE quantization-aware training — adapt to 8-bit JPEG output
+name: "AFUNet_GM_SFT_stage4"
+seed: 42
+
+paths:
+  train_dir: "./datas"
+  log_root:  "./checkpoints"
+  resume_path:         null
+  pretrained_backbone: "./checkpoints/AFUNet_GM_SFT_stage3/latest_ema_model.pth"
+
+data:
+  num_workers:     8
+  batch_size:      3
+  crop_size:       256
+  dataset_repeats: 3
+  use_strong_aug:  true
+
+model:
+  filename: "AFUNet_GM_SFT"
+  type:     "AFUNet"
+
+train:
+  epochs:           60
+  lr:               1e-5
+  min_lr:           1.0e-6
+  grad_accum_steps: 1
+  log_interval:     50
+  use_lpips_weighted: true
+  use_ste_quant:      true    # Enable STE quantization-aware training
+  use_ema:            true
+  ema_decay:          0.999
